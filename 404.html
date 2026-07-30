@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex" />
+    <title>The CSS Wasteland</title>
+    <script>
+      // GitHub Pages serves this for any path that isn't a real file. The app
+      // uses BrowserRouter so the URLs stay real (/decks/museum-of-bugs rather
+      // than /#/decks/...), and on a static host that means deep links land
+      // here first -- Pages has no rewrite rule to hand them back to the SPA.
+      //
+      // For now, everything unmatched goes HOME. Deliberately not a
+      // path-restoring shim: that variant stashes the requested path, bounces,
+      // and replays it before React boots, which is more machinery than a
+      // pre-launch site needs and it silently "restores" genuine typos too.
+      // The home wall is a fine place to land, and it's honest -- the visitor
+      // sees where they actually are.
+      //
+      // The cost, worth knowing before sharing links widely: a deep link to a
+      // deck opens the home page instead of that deck. Fix that by restoring
+      // the stashed path here when it matters (see the spec's after-live list).
+      //
+      // replace(), not assign(): the 404 URL must not enter history, or Back
+      // would bounce the visitor through it again.
+      location.replace("/");
+    </script>
+  </head>
+  <body>
+    <!-- Only visible if JS is off, in which case the redirect can't happen. -->
+    <p>Not found. <a href="/">Go to the CSS Wasteland</a>.</p>
+  </body>
+</html>
