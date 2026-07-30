@@ -48,7 +48,24 @@
       content="Slide decks about engineering, played one panel at a time. Where you go when you're waiting for the build."
     />
     <meta name="twitter:image" content="https://johnfrog76.github.io/css-wasteland/og.png" />
-    <script type="module" crossorigin src="/css-wasteland/assets/index-Dap3VGFR.js"></script>
+
+    <!-- GA4. Stripped entirely from dev builds — the whole block is replaced
+         with a comment unless this is a production build (see vite.config.ts),
+         so local work never reaches the property and there's no script to load
+         while developing.
+
+         send_page_view is FALSE on purpose: this is a BrowserRouter SPA, so
+         GA's automatic page view would fire once and then never again. Views
+         are sent per route change by PageViewTracker instead. Leaving the
+         default on would double-count the first page of every session. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RYXYC7GQLG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RYXYC7GQLG', { send_page_view: false });
+    </script>
+    <script type="module" crossorigin src="/css-wasteland/assets/index-CHmmJFuL.js"></script>
   </head>
   <body style="margin: 0; padding: 0">
     <div id="root"></div>
