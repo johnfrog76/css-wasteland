@@ -5,40 +5,39 @@
     <meta name="robots" content="noindex" />
     <title>The CSS Wasteland</title>
     <script>
-      // GitHub Pages serves this for any path that isn't a real file. The app
-      // uses BrowserRouter so the URLs stay real (/decks/museum-of-bugs rather
-      // than /#/decks/...), and on a static host that means deep links land
-      // here first -- Pages has no rewrite rule to hand them back to the SPA.
+      // GitHub Pages serves this file for any path that isn't a real file on
+      // disk. The app uses BrowserRouter so its URLs stay real
+      // (/decks/museum-of-bugs, not /#/decks/museum-of-bugs), and Pages has no
+      // rewrite rule to hand those back to the SPA -- so every deep link lands
+      // here first. This is the standard shim that sends it onward.
       //
-      // For now, everything unmatched goes HOME. Deliberately not a
-      // path-restoring shim: that variant stashes the requested path, bounces,
-      // and replays it before React boots, which is more machinery than a
-      // pre-launch site needs and it silently "restores" genuine typos too.
-      // The home wall is a fine place to land, and it's honest -- the visitor
-      // sees where they actually are.
+      // The requested path is stashed in sessionStorage and replayed by
+      // index.html once React has booted, so a shared deck link opens THAT
+      // deck rather than dumping the visitor on the home wall. Sharing links
+      // is most of what this site is for; landing them somewhere else is a
+      // worse failure than the small amount of machinery here.
       //
-      // The cost, worth knowing before sharing links widely: a deep link to a
-      // deck opens the home page instead of that deck. Fix that by restoring
-      // the stashed path here when it matters (see the spec's after-live list).
-      //
-      // replace(), not assign(): the 404 URL must not enter history, or Back
-      // would bounce the visitor through it again.
-      //
-      // "/" is only the app root when the site owns the whole domain. On a
-      // project page (…github.io/css-wasteland/) it's the root of the USER
-      // site — a different site — so redirecting there hands the visitor
-      // someone else's page.
-      //
-      // /css-wasteland/ is substituted at build time by vite's html transform, so
-      // this always matches the base the bundle was built with. It cannot be
-      // derived from the URL: at an apex domain "/decks" is a real route, and
-      // on a project page it's a prefix, and nothing in the path distinguishes
-      // those two cases.
-      location.replace("/css-wasteland/");
+      // /css-wasteland/ is substituted at build time (see vite.config.ts) and can't
+      // be derived at runtime: on an apex domain "/decks" is a route, on a
+      // project page it's a prefix, and the URL alone can't tell you which.
+      var base = "/css-wasteland/";
+      var path = location.pathname;
+      // Everything after the app root -- the route the visitor actually asked
+      // for. Guard against a path that somehow doesn't start with base.
+      var route = path.indexOf(base) === 0 ? path.slice(base.length) : "";
+      try {
+        sessionStorage.setItem("wasteland:redirect", route + location.search + location.hash);
+      } catch (e) {
+        // Private mode / storage disabled: fall through and land on home.
+        // Degraded, not broken.
+      }
+      // replace(), not assign(): this URL must not enter history, or Back
+      // would bounce the visitor straight through it again.
+      location.replace(base);
     </script>
   </head>
   <body>
-    <!-- Only visible if JS is off, in which case the redirect can't happen. -->
+    <!-- Only visible with JS off, in which case no redirect can happen. -->
     <p>Not found. <a href="./">Go to the CSS Wasteland</a>.</p>
   </body>
 </html>
