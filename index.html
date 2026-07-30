@@ -23,7 +23,7 @@
          would need pre-rendered HTML per route. Not worth a build step for it.
 
          og:image must be ABSOLUTE (crawlers don't resolve relative paths), so
-         it's built from https://johnfrog76.github.io + /css-wasteland/, both substituted at build
+         it's built from https://css-wasteland.com + /, both substituted at build
          time. Hardcoding the project-page URL would silently break the card
          the day the apex domain goes live. -->
     <meta property="og:type" content="website" />
@@ -31,10 +31,10 @@
     <meta property="og:title" content="The CSS Wasteland" />
     <meta
       property="og:description"
-      content="Slide decks about engineering, played one panel at a time. Where you go when you're waiting for the build."
+      content="A blog about technology and engineering culture — written as slide decks, animated entirely in CSS."
     />
-    <meta property="og:url" content="https://johnfrog76.github.io/css-wasteland/" />
-    <meta property="og:image" content="https://johnfrog76.github.io/css-wasteland/og.png" />
+    <meta property="og:url" content="https://css-wasteland.com/" />
+    <meta property="og:image" content="https://css-wasteland.com/og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta
@@ -45,9 +45,9 @@
     <meta name="twitter:title" content="The CSS Wasteland" />
     <meta
       name="twitter:description"
-      content="Slide decks about engineering, played one panel at a time. Where you go when you're waiting for the build."
+      content="A blog about technology and engineering culture — written as slide decks, animated entirely in CSS."
     />
-    <meta name="twitter:image" content="https://johnfrog76.github.io/css-wasteland/og.png" />
+    <meta name="twitter:image" content="https://css-wasteland.com/og.png" />
 
     <!-- GA4. Stripped entirely from dev builds — the whole block is replaced
          with a comment unless this is a production build (see vite.config.ts),
@@ -58,8 +58,14 @@
          GA's automatic page view would fire once and then never again. Views
          are sent per route change by PageViewTracker instead. Leaving the
          default on would double-count the first page of every session. -->
-    <!-- analytics: off (ANALYTICS_ENABLED) -->
-    <script type="module" crossorigin src="/css-wasteland/assets/index-CHmmJFuL.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RYXYC7GQLG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RYXYC7GQLG', { send_page_view: false });
+    </script>
+    <script type="module" crossorigin src="/assets/index-B0z2K6ae.js"></script>
   </head>
   <body style="margin: 0; padding: 0">
     <div id="root"></div>
