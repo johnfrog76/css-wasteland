@@ -24,11 +24,3 @@ repo you can actually read:
 A slide there is just a React component, so it can render a live chart, call a
 real API, or embed a piece of your own product's UI — rather than a screenshot
 of one. Take it and build your own.
-
-## How this repo gets built
-
-A private toolkit builds the site and pushes the build output here. No CI runs in this
-repo; there is nothing to build, only something to serve. That split is why the
-source can stay private while the site stays free and public — Pages needs the
-bundle, not the code, and the bundle is handed to every visitor's browser
-anyway.
