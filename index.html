@@ -12,6 +12,42 @@
          actually keeps the site out of the index. -->
     <meta name="robots" content="noindex" />
     <title>The CSS Wasteland</title>
+
+    <!-- Link previews (iMessage, Teams, Slack, WhatsApp). Independent of the
+         noindex above: that keeps the site out of SEARCH, these control how a
+         PASTED LINK renders. A soft launch still wants shared links to look
+         like something.
+
+         One card for the whole site, deliberately. Preview crawlers don't run
+         JavaScript — they read this static HTML and stop — so per-deck cards
+         would need pre-rendered HTML per route. Not worth a build step for it.
+
+         og:image must be ABSOLUTE (crawlers don't resolve relative paths), so
+         it's built from https://johnfrog76.github.io + /css-wasteland/, both substituted at build
+         time. Hardcoding the project-page URL would silently break the card
+         the day the apex domain goes live. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="The CSS Wasteland" />
+    <meta property="og:title" content="The CSS Wasteland" />
+    <meta
+      property="og:description"
+      content="Slide decks about engineering, played one panel at a time. Where you go when you're waiting for the build."
+    />
+    <meta property="og:url" content="https://johnfrog76.github.io/css-wasteland/" />
+    <meta property="og:image" content="https://johnfrog76.github.io/css-wasteland/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A night skyline of labelled towers — Chrome, Scenes, Deck, Motion, Renderer — under a dashed arc of stars."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="The CSS Wasteland" />
+    <meta
+      name="twitter:description"
+      content="Slide decks about engineering, played one panel at a time. Where you go when you're waiting for the build."
+    />
+    <meta name="twitter:image" content="https://johnfrog76.github.io/css-wasteland/og.png" />
     <script type="module" crossorigin src="/css-wasteland/assets/index-Dap3VGFR.js"></script>
   </head>
   <body style="margin: 0; padding: 0">
