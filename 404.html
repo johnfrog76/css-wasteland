@@ -23,11 +23,22 @@
       //
       // replace(), not assign(): the 404 URL must not enter history, or Back
       // would bounce the visitor through it again.
-      location.replace("/");
+      //
+      // "/" is only the app root when the site owns the whole domain. On a
+      // project page (…github.io/css-wasteland/) it's the root of the USER
+      // site — a different site — so redirecting there hands the visitor
+      // someone else's page.
+      //
+      // /css-wasteland/ is substituted at build time by vite's html transform, so
+      // this always matches the base the bundle was built with. It cannot be
+      // derived from the URL: at an apex domain "/decks" is a real route, and
+      // on a project page it's a prefix, and nothing in the path distinguishes
+      // those two cases.
+      location.replace("/css-wasteland/");
     </script>
   </head>
   <body>
     <!-- Only visible if JS is off, in which case the redirect can't happen. -->
-    <p>Not found. <a href="/">Go to the CSS Wasteland</a>.</p>
+    <p>Not found. <a href="./">Go to the CSS Wasteland</a>.</p>
   </body>
 </html>
