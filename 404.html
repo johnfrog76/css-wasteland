@@ -17,10 +17,10 @@
       // is most of what this site is for; landing them somewhere else is a
       // worse failure than the small amount of machinery here.
       //
-      // / is substituted at build time (see vite.config.ts) and can't
+      // /css-wasteland/ is substituted at build time (see vite.config.ts) and can't
       // be derived at runtime: on an apex domain "/decks" is a route, on a
       // project page it's a prefix, and the URL alone can't tell you which.
-      var base = "/";
+      var base = "/css-wasteland/";
       var path = location.pathname;
       // Everything after the app root -- the route the visitor actually asked
       // for. Guard against a path that somehow doesn't start with base.
